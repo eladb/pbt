@@ -3,7 +3,7 @@ $(function() {
 
   var product_item_tpl = $('#tpl-product-list-item').html();
 
-  god.match(/\/products\/.+/, function(err, req) {
+  god.on(/\/products\/.+/, function(err, req) {
     console.log('url:', req.url);
     console.log('data:', req.body);
   });
@@ -28,12 +28,18 @@ $(function() {
 function godframework() {
   var god = new EventEmitter();
 
+  var _on = god.on;
   var _emit = god.emit;
   var _res = [];
 
-  god.match = function(re, fn) {
-    _res.push({ re: re, fn: fn });
-    return this;
+  god.on = function(re, fn) {
+    if (typeof re === 'object' && re.test) {
+      _res.push({ re: re, fn: fn });
+      return this;
+    }
+    else {
+      return _on.apply(this, arguments);
+    }
   };
 
   god.emit = function(evt) {
