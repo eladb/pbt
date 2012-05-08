@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Telobike</title>
+  <link rel='stylesheet' type='text/css' href='css/bootstrap.min.css'>
+  <link rel='stylesheet' type='text/css' href='css/index.css'>
+</head>
+
+<body>
+
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#"><strong>parents</strong>buy<strong>together</strong></a>
+        <div class="nav-collapse">
+
+          <ul class="nav">
+            <li id='home'><a href="#/">Home</a></li>
+          </ul>
+
+          <div class='btn-group pull-right'>
+            <a id='reload' class='pull-right btn btn-small btn-success'>Refresh</a>
+          </div>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+
+  <div class='container'>
+    <div class='row'>
+      <div id='list' class='offset2 span8'>
+      </div>
+    </div>
+  </div>
+
+  <script type='text/x-jquery-tmpl' id='tpl-product-list-item'>
+    <div class='well'>
+      <div class='row'>
+        <div class='span2'><img src='{{picture}}'></img></div>
+        <div class='span5'>
+          <p class='well message' dir='rtl'>{{message}}</p>
+        </div>
+      </div>
+      <div class='row'>
+      &nbsp;
+      </div>
+      <div class='row'>
+        <div class='span7'>
+
+          {{#has_comments}}
+          <h4>Interested</h4>
+          <p>
+          <table class='table table-bordered table-striped'>
+            {{#comments}}
+              {{#email}}
+              <tr>
+              <th><a href='mailto:{{email}}'>{{email}}</a></th>
+              <td>{{message}}</td>
+              </tr>
+              {{/email}}
+            {{/comments}}
+          </table>
+          </p>
+          {{/has_comments}}
+
+          {{^has_comments}}
+          <div class="alert alert-info">
+            No comments
+          </div>
+          {{/has_comments}}
+          
+          <hr/>
+          <p class='pull-right'>
+<!--            <a href='#' class='btn'><span class='icon-shopping-cart'></span></a>
+            <a href='#' class='btn'><span class='icon-remove'></span></a>
+            -->
+            <a href='{{link}}' class='btn'><span class='icon-picture'></span></a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <script src='js/jquery-1.7.2.min.js'></script>
+  <script src='js/jquery.ba-bbq.min.js'></script>
+  <script src='js/mustache.js'></script>
+  <script src='js/bootstrap.min.js'></script>
+  <script src='js/EventEmitter.min.js'></script>
+  <!--
+  <script src="js/underscore-min.js"></script>
+  <script src="js/backbone-min.js"></script>
+  -->
+  <script src="js/index.js"></script>
+</body>
+</html>
