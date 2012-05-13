@@ -6,7 +6,7 @@ module.exports = function(graph, callback) {
 
   var posts = [];
 
-  graph.get('parent.buy.together/posts?limit=10', function(err, res) {
+  graph.get('parent.buy.together/posts?limit=100', function(err, res) {
     if (err) {
       throw new Error('error:' + err.message);
     }
