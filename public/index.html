@@ -9,6 +9,8 @@
 
 <body>
 
+  <div id="fb-root"></div>
+
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
@@ -24,8 +26,17 @@
             <li id='home'><a href="#/">Home</a></li>
           </ul>
 
-          <div class='btn-group pull-right'>
-            <a id='reload' class='pull-right btn btn-small btn-success'>Refresh</a>
+          <div class='pull-right'>
+            <div class='fb_button' id='auth-login'>
+              <a href='/login' class='fb_button_medium'>
+                <span class='fb_button_text'>Login</span>
+              </a>
+            </div>
+             <div class='fb_button' id='auth-logout'>
+              <a href='/logout' class='fb_button_medium'>
+                <span class='fb_button_text'>Logout <span id='auth-displayname'></span></span>
+              </a>
+            </div>
           </div>
         </div><!--/.nav-collapse -->
       </div>
@@ -77,9 +88,6 @@
           
           <hr/>
           <p class='pull-right'>
-<!--            <a href='#' class='btn'><span class='icon-shopping-cart'></span></a>
-            <a href='#' class='btn'><span class='icon-remove'></span></a>
-            -->
             <a href='{{link}}' class='btn'><span class='icon-picture'></span></a>
           </p>
         </div>
@@ -87,6 +95,8 @@
     </div>
   </script>
 
+  <!--<script src='js/fb.js'></script> -->
+  <script src="http://static.ak.fbcdn.net/connect/en_US/core.js"></script>
   <script src='js/jquery-1.7.2.min.js'></script>
   <script src='js/jquery.ba-bbq.min.js'></script>
   <script src='js/mustache.js'></script>

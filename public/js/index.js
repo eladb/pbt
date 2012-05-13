@@ -9,18 +9,31 @@ $(function() {
   });
 
   god.on('/products', function(err, req) {
-
     var products = req.body;
 
     $('#list').empty();
-
     products.forEach(function(product) {
       product.has_comments = product.comments && product.comments.length > 0;
       var x = Mustache.render(product_item_tpl, product);
       $('#list').append($(x));
     });
+  });
 
-  })
+  $('#auth-logout').hide();
+  $('#auth-login').hide();
+  god.get('/me');
+
+  god.on('/me', function(err, req) {
+    if (err) {
+      $('#auth-logout').hide();
+      $('#auth-login').show();
+      return;
+    }
+    
+    $('#auth-login').hide();
+    $('#auth-logout').show();
+    $('#auth-displayname').html(req.body.name);
+  });
 });
 
 // --- god starts here
@@ -60,13 +73,11 @@ function godframework() {
     return _emit.apply(this, arguments);
   };
 
-  $(window).bind('hashchange', function() {
-    var url = location.hash.substring(1);
-    
-    var ajax = $.get(url);
-    
-    var req = { url: url };
+  god.get = function(url) {
+    console.log('fetch', url);
 
+    var req = { url: url };
+    var ajax = $.get(url);
     ajax.success(function(body) { 
       req.body = body;
       god.emit(url, null, req);
@@ -76,7 +87,11 @@ function godframework() {
       req.error = { err: { status: err.status, statusText: err.statusText } };
       god.emit(url, req.error, req);
     });
+  };
 
+  $(window).bind('hashchange', function() {
+    var url = location.hash.substring(1);
+    god.get(url);    
   });
 
   $(window).trigger('hashchange');
