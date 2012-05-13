@@ -1,7 +1,6 @@
 var path = require('path');
 var fs = require('fs');
 var express = require('express');
-//var auth = require('connect-auth');
 var fbapp = require('./fbapp');
 var graph = require('fbgraph');
 var grab = require('./grab');
