@@ -23,7 +23,7 @@ module.exports = function(graph, callback) {
 
     async.forEach(posts, function(post, cb) {
       graph.get(post.id + '/comments', function(err, res) {
-        post.comments = [];
+        p.comments = [];
         res.data.forEach(function(comment) {
 
           var c = {
@@ -38,7 +38,7 @@ module.exports = function(graph, callback) {
             c.email = _[0];
           }
 
-          post.comments.push(c);
+          p.comments.push(c);
 
           return cb();
         });
