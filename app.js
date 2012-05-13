@@ -103,4 +103,4 @@ server.get('/products/:id', auth, function(req, res) {
   return res.send(found[0]);
 });
 
-server.listen(5000);
+server.listen(process.env.port || 5000);
