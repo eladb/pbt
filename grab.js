@@ -44,6 +44,7 @@ module.exports = function(graph, callback) {
         });
       });
     }, function(err) {
+      console.log(posts);
       return callback(err, posts);
     });
   });
