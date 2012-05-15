@@ -10,6 +10,7 @@ module.exports = function(graph, callback) {
     if (err) {
       throw new Error('error:' + err.message);
     }
+
     res.data.forEach(function(post) {
       var p = {
         id: post.id,
@@ -23,7 +24,9 @@ module.exports = function(graph, callback) {
 
     async.forEach(posts, function(post, cb) {
       graph.get(post.id + '/comments', function(err, res) {
-        p.comments = [];
+        
+        post.comments = [];
+        
         res.data.forEach(function(comment) {
 
           var c = {
@@ -36,9 +39,10 @@ module.exports = function(graph, callback) {
           var _ = EMAIL_PARSER.exec(c.message);
           if (_) {
             c.email = _[0];
+            console.log('found email:', c.email);
           }
 
-          p.comments.push(c);
+          post.comments.push(c);
 
           return cb();
         });
